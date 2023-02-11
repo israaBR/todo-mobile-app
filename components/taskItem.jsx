@@ -8,7 +8,7 @@ export const TaskItem = (props) => {
     <View style={styles.item}>
       <CheckBox
         style={styles.checkbox}
-        color={"#000"}
+        color={"#b3b3ba"}
         value={props.checked}
         onValueChange={(newValue) => {
           if (newValue) props.checkTask(props.index);
@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
   },
   checkbox: {
     // flex: 1,
-    width: "8%",
-    height: "50%",
+    width: "7%",
+    height: "45%",
     color: "#000",
     marginHorizontal: "1%",
     marginVertical: "4%",
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
   checkedTask: {
     flex: 3,
-    color: "#000",
+    color: "#b3b3ba",
     fontSize: 20,
     paddingHorizontal: "3%",
     paddingVertical: "4%",

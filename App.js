@@ -17,18 +17,18 @@ import { TaskItem } from "./components/taskItem";
 
 export default function App() {
   const [tasks, setTasks] = useState([
-    { title: "checked task", checked: true },
-    { title: "unchecked task", checked: false },
-    { title: "unchecked task", checked: false },
-    { title: "checked task", checked: true },
-    { title: "checked task", checked: true },
-    { title: "checked task", checked: true },
-    { title: "checked task", checked: true },
-    { title: "checked task", checked: true },
-    { title: "checked task", checked: true },
-    { title: "checked task", checked: true },
-    { title: "unchecked task", checked: false },
-    { title: "unchecked task", checked: false },
+    // { title: "checked task", checked: true },
+    // { title: "unchecked task", checked: false },
+    // { title: "unchecked task", checked: false },
+    // { title: "checked task", checked: true },
+    // { title: "checked task", checked: true },
+    // { title: "checked task", checked: true },
+    // { title: "checked task", checked: true },
+    // { title: "checked task", checked: true },
+    // { title: "checked task", checked: true },
+    // { title: "checked task", checked: true },
+    // { title: "unchecked task", checked: false },
+    // { title: "unchecked task", checked: false },
   ]);
   const [inputTxt, setInputText] = useState("");
 
@@ -39,10 +39,11 @@ export default function App() {
   };
 
   const removeTask = (_index) => {
-    tasks.filter((task, index) => {
-      if (index != _index) return task;
-    });
-    console.log(tasks.length);
+    setTasks(
+      tasks.filter((task, index) => {
+        if (index != _index) return task;
+      })
+    );
   };
   const checkTask = (_index) => {
     let checked;
