@@ -16,28 +16,15 @@ import { useState } from "react";
 import { TaskItem } from "./components/taskItem";
 
 export default function App() {
-  const [tasks, setTasks] = useState([
-    // { title: "checked task", checked: true },
-    // { title: "unchecked task", checked: false },
-    // { title: "unchecked task", checked: false },
-    // { title: "checked task", checked: true },
-    // { title: "checked task", checked: true },
-    // { title: "checked task", checked: true },
-    // { title: "checked task", checked: true },
-    // { title: "checked task", checked: true },
-    // { title: "checked task", checked: true },
-    // { title: "checked task", checked: true },
-    // { title: "unchecked task", checked: false },
-    // { title: "unchecked task", checked: false },
-  ]);
+  const [tasks, setTasks] = useState([]);
   const [inputTxt, setInputText] = useState("");
 
   const addTask = () => {
     if (!inputTxt)
-      ToastAndroid.show("Can't add empty task", ToastAndroid.SHORT);
+      ToastAndroid.show("Can't add an empty task", ToastAndroid.SHORT);
     else setTasks([...tasks, { title: inputTxt, checked: false }]);
+    setInputText("");
   };
-
   const removeTask = (_index) => {
     setTasks(
       tasks.filter((task, index) => {
@@ -86,6 +73,7 @@ export default function App() {
       <View style={styles.row_top}>
         <TextInput
           placeholder="What do you need to do?"
+          value={inputTxt}
           style={styles.textInput}
           onChangeText={(input) => {
             setInputText(input);
@@ -114,12 +102,12 @@ export default function App() {
       </View>
 
       <View style={styles.row_bottom}>
-        <Text style={styles.text}>You have {tasks.length} pending tasks</Text>
         <View style={styles.button}>
           <Button
             title="Clear All"
             color={"#601921"}
             onPress={clearAllTasks}
+            disabled={tasks.length ? false : true}
           ></Button>
         </View>
       </View>
@@ -176,13 +164,11 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     justifyContent: "space-between",
   },
-  text: {
-    flex: 2,
-    fontSize: 18,
-    alignSelf: "center",
-  },
   button: {
     flex: 1,
     backgroundColor: "#601921",
+    borderRadius: 10,
+    padding: "1%",
+    margin: "2%",
   },
 });
