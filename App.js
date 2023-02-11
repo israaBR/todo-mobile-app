@@ -10,7 +10,7 @@ import {
   ToastAndroid,
 } from "react-native";
 import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons/faPlus";
+import { faPlusSquare } from "@fortawesome/free-solid-svg-icons/faPlusSquare";
 import { useState } from "react";
 
 import { TaskItem } from "./components/taskItem";
@@ -70,6 +70,7 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <StatusBar style="auto" />
       <View style={styles.row_top}>
         <TextInput
           placeholder="What do you need to do?"
@@ -80,7 +81,7 @@ export default function App() {
           }}
         ></TextInput>
         <TouchableOpacity onPress={addTask}>
-          <FontAwesomeIcon icon={faPlus} style={styles.icon} size={38} />
+          <FontAwesomeIcon icon={faPlusSquare} style={styles.icon} size={38} />
         </TouchableOpacity>
       </View>
       <View style={styles.list}>
@@ -111,7 +112,6 @@ export default function App() {
           ></Button>
         </View>
       </View>
-      {/* <StatusBar style="auto" /> */}
     </View>
   );
 }
@@ -128,7 +128,8 @@ const styles = StyleSheet.create({
   row_top: {
     flex: 1,
     flexDirection: "row",
-    marginVertical: "3%",
+    marginTop: "12%",
+    marginBottom: "1%",
     alignItems: "flex-start",
     justifyContent: "space-around",
   },
@@ -138,6 +139,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#f7f7ff",
     color: "#000",
     fontSize: 18,
+    marginHorizontal: "2%",
+
     paddingHorizontal: "1%",
     paddingVertical: "2%",
     borderRadius: 5,
@@ -147,6 +150,7 @@ const styles = StyleSheet.create({
   },
   icon: {
     flex: 1,
+    paddingHorizontal: "2%",
     backgroundColor: "#f7f7ff",
     color: "#192160",
     borderColor: "#192160",
