@@ -19,6 +19,16 @@ export default function App() {
   const [tasks, setTasks] = useState([
     { title: "checked task", checked: true },
     { title: "unchecked task", checked: false },
+    { title: "unchecked task", checked: false },
+    { title: "checked task", checked: true },
+    { title: "checked task", checked: true },
+    { title: "checked task", checked: true },
+    { title: "checked task", checked: true },
+    { title: "checked task", checked: true },
+    { title: "checked task", checked: true },
+    { title: "checked task", checked: true },
+    { title: "unchecked task", checked: false },
+    { title: "unchecked task", checked: false },
   ]);
   const [inputTxt, setInputText] = useState("");
 
@@ -29,17 +39,42 @@ export default function App() {
   };
 
   const removeTask = (_index) => {
-    tasks.filter((task, index) => index != _index);
+    tasks.filter((task, index) => {
+      if (index != _index) return task;
+    });
+    console.log(tasks.length);
   };
   const checkTask = (_index) => {
-    tasks.map((task, index) => {
-      if (index == _index) task.checked = true;
-    });
+    let checked;
+    setTasks(
+      tasks.map((task, index) => {
+        if (index == _index) {
+          checked = true;
+        } else {
+          checked = task.checked;
+        }
+        return {
+          title: task.title,
+          checked,
+        };
+      })
+    );
   };
   const unCheckTask = (_index) => {
-    tasks.map((task, index) => {
-      if (index == _index) task.checked = false;
-    });
+    let checked;
+    setTasks(
+      tasks.map((task, index) => {
+        if (index == _index) {
+          checked = false;
+        } else {
+          checked = task.checked;
+        }
+        return {
+          title: task.title,
+          checked,
+        };
+      })
+    );
   };
   const clearAllTasks = () => {
     setTasks([]);
@@ -59,20 +94,24 @@ export default function App() {
           <FontAwesomeIcon icon={faPlus} style={styles.icon} size={38} />
         </TouchableOpacity>
       </View>
-      <ScrollView style={styles.list}>
-        {tasks.map((task, index) => {
-          return (
-            <TaskItem
-              task={task.title}
-              checked={task.checked}
-              checkTask={checkTask}
-              unCheckTask={unCheckTask}
-              removeTask={removeTask}
-              key={index}
-            />
-          );
-        })}
-      </ScrollView>
+      <View style={styles.list}>
+        <ScrollView>
+          {tasks.map((task, index) => {
+            return (
+              <TaskItem
+                index={index}
+                task={task.title}
+                checked={task.checked}
+                checkTask={checkTask}
+                unCheckTask={unCheckTask}
+                removeTask={removeTask}
+                key={index}
+              />
+            );
+          })}
+        </ScrollView>
+      </View>
+
       <View style={styles.row_bottom}>
         <Text style={styles.text}>You have {tasks.length} pending tasks</Text>
         <View style={styles.button}>
@@ -91,7 +130,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#f7f7ff",
     alignItems: "flex-start",
     justifyContent: "flex-start",
     paddingHorizontal: "1%",
@@ -107,7 +146,7 @@ const styles = StyleSheet.create({
   textInput: {
     flex: 3,
     width: "70%",
-    backgroundColor: "#fff",
+    backgroundColor: "#f7f7ff",
     color: "#000",
     fontSize: 18,
     paddingHorizontal: "1%",
@@ -119,14 +158,14 @@ const styles = StyleSheet.create({
   },
   icon: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#f7f7ff",
     color: "#192160",
     borderColor: "#192160",
     borderWidth: 1,
   },
   list: {
+    flex: 10,
     width: "100%",
-    // flex: 2,
     flexDirection: "column",
   },
   row_bottom: {

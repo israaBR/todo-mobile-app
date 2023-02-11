@@ -7,10 +7,12 @@ export const TaskItem = (props) => {
   return (
     <View style={styles.item}>
       <CheckBox
-        disabled={props.checked}
+        style={styles.checkbox}
+        color={"#000"}
         value={props.checked}
         onValueChange={(newValue) => {
-          console.log(newValue);
+          if (newValue) props.checkTask(props.index);
+          else props.unCheckTask(props.index);
         }}
       />
       <Text style={props.checked ? styles.checkedTask : styles.unCheckedTask}>
@@ -18,10 +20,10 @@ export const TaskItem = (props) => {
       </Text>
       <TouchableOpacity
         onPress={() => {
-          props.removeTask(props.key);
+          props.removeTask(props.index);
         }}
       >
-        <FontAwesomeIcon icon={faTrash} style={styles.icon} size={38} />
+        <FontAwesomeIcon icon={faTrash} style={styles.icon} size={28} />
       </TouchableOpacity>
     </View>
   );
@@ -32,32 +34,37 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     height: "auto",
     marginVertical: "1%",
+    paddingVertical: "1%",
+    backgroundColor: "#fff",
+    borderRadius: 5,
   },
   checkbox: {
-    flex: 1,
+    // flex: 1,
+    width: "8%",
+    height: "50%",
+    color: "#000",
+    marginHorizontal: "1%",
+    marginVertical: "4%",
   },
   unCheckedTask: {
-    flex: 2,
-    color: "#ffffff",
+    flex: 3,
+    color: "#000",
     fontSize: 20,
     paddingHorizontal: "3%",
     paddingVertical: "4%",
-    backgroundColor: "#192160",
-    borderRadius: 7,
   },
   checkedTask: {
-    flex: 2,
-    color: "#fff",
-    backgroundColor: "#babccf",
+    flex: 3,
+    color: "#000",
     fontSize: 20,
     paddingHorizontal: "3%",
     paddingVertical: "4%",
     textDecorationLine: "line-through",
-    borderRadius: 7,
   },
   icon: {
     flex: 1,
-    backgroundColor: "#fff",
-    color: "#601921",
+    color: "#630909",
+    marginVertical: "55%",
+    marginHorizontal: "0.5%",
   },
 });
